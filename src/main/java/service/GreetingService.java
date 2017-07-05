@@ -1,4 +1,4 @@
-package app;
+package service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,8 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
+
+import model.Greeting;
 
 @Service
 public class GreetingService {
@@ -35,6 +37,11 @@ public class GreetingService {
 		}
 	}
 
+	/**
+	 * Get Greetings list by criteria from mongodb
+	 * @param id criteria
+	 * @return List<DBObject> of greetings
+	 */
 	public List<DBObject> readGreeting(String id) {
 
 		List<DBObject> list = new ArrayList<>();
@@ -50,14 +57,29 @@ public class GreetingService {
 		return list;
 	}
 
+	/**
+	 * Create a new Greeting in mongodb
+	 * @param greeting Greeting object for adding
+	 * @return Object WriteResult, that contains request result info
+	 */
 	public WriteResult createGreeting(Greeting greeting) {
 		return collection.save(Greeting.getDBObject(greeting));
 	}
 
+	/**
+	 * Update an existing Greeting in mongodb
+	 * @param greeting Greeting object for updating
+	 * @return Object WriteResult, that contains request result info
+	 */
 	public WriteResult updateGreeting(Greeting greeting) {
 		return collection.update(collection.findOne(greeting.getId()), Greeting.getDBObject(greeting));
 	}
 
+	/**
+	 * Remove an Greeting from mongodb
+	 * @param id Greeting id
+	 * @return Object WriteResult, that contains request result info
+	 */
 	public WriteResult deleteGreeting(String id) {
 		return collection.remove(collection.findOne(id));
 	}

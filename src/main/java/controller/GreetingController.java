@@ -1,4 +1,4 @@
-package app;
+package controller;
 
 import java.util.List;
 
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 
+import model.Greeting;
+import service.GreetingService;
+
 @RestController
 @RequestMapping("greetings")
 public class GreetingController {
@@ -21,8 +24,8 @@ public class GreetingController {
 
 	/**
 	 * Get Greetings list by criteria
-	 * @param id - Greeting object id or all
-	 * @return - List<DBObject> of greetings
+	 * @param id Greeting object id or all
+	 * @return List<DBObject> of greetings
 	 */
 	@RequestMapping(value = "/read/{id}", method = RequestMethod.GET)
 	public List<DBObject> readGreeting(@PathVariable("id") String id) {
@@ -31,8 +34,8 @@ public class GreetingController {
 
 	/**
 	 * Create a new Greeting
-	 * @param greeting - Greeting object for adding
-	 * @return - Object WriteResult, that contains request result info
+	 * @param greeting Greeting object for adding
+	 * @return Object WriteResult, that contains request result info
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public WriteResult createGreeting(@RequestBody Greeting greeting) {
@@ -41,8 +44,8 @@ public class GreetingController {
 
 	/**
 	 * Update an existing Greeting
-	 * @param greeting - Greeting object for updating
-	 * @return - Object WriteResult, that contains request result info
+	 * @param greeting Greeting object for updating
+	 * @return Object WriteResult, that contains request result info
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	public WriteResult updateGreeting(@RequestBody Greeting greeting) {
@@ -51,8 +54,8 @@ public class GreetingController {
 
 	/**
 	 * Remove an Greeting
-	 * @param id - Greeting id
-	 * @return - Object WriteResult, that contains request result info
+	 * @param id Greeting id
+	 * @return Object WriteResult, that contains request result info
 	 */
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public WriteResult deleteGreeting(@PathVariable("id") String id) {

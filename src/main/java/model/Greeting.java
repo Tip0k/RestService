@@ -1,20 +1,17 @@
-package app;
-
-//import org.springframework.data.annotation.Id;
+package model;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 public class Greeting {
 
-	//@Id
 	private String id;
 	private String content;
 
 	public Greeting() {
-		
+
 	}
-	
+
 	public Greeting(String id, String content) {
 		this.id = id;
 		this.content = content;
@@ -36,6 +33,12 @@ public class Greeting {
 		this.content = content;
 	}
 
+	/**
+	 * Convert Greeting object to DBObject
+	 * 
+	 * @param greeting convert object
+	 * @return DBObject that represents Greeting object
+	 */
 	public static final DBObject getDBObject(Greeting greeting) {
 		return new BasicDBObject("_id", greeting.getId()).append("name", greeting.getContent());
 	}
